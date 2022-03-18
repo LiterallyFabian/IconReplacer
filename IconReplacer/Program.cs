@@ -6,7 +6,14 @@ namespace IconReplacer
     {
         static void Main(string[] args)
         {
-            string path = "./input";
+            const string path = "./input";
+            if (!Directory.Exists(path))
+            {
+                Console.WriteLine("Input directory does not exist. Download an icon pack and put it in a folder named 'input' in the same directory as this program.");
+                Console.ReadKey();
+                return;
+            }
+            
             string[] files = Directory.GetFiles(path, "*.png", SearchOption.AllDirectories);
             string icon = GetIcon();
             
@@ -25,6 +32,9 @@ namespace IconReplacer
                 
                 File.Copy(icon, output);
             }
+            
+            Console.WriteLine("Done. All icons have been replaced in a directory named 'output' in the same directory as this program.");
+            Console.ReadKey();
         }
         
         private static string GetIcon()
